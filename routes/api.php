@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::post('user/register')->uses('UserController@register')->name('users.register');
+Route::post('user/login')->uses('UserController@login')->name('users.login');
+Route::middleware('jwt.auth')->post('user/message')->uses('UserController@message')->name('users.message');
+Route::middleware('jwt.auth')->post('user/message/reply')->uses('UserController@reply')->name('users.reply');
